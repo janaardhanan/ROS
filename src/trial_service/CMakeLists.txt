@@ -58,6 +58,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_service_files(
   FILES
   SumProduct.srv
+  Diff.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -160,7 +161,7 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
-  scripts/pyserver.py scripts/pyclient.py
+  scripts/pyserver.py scripts/pyclient.py scripts/pyclient2.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -212,3 +213,7 @@ add_dependencies(cppserver trial_service_gencpp)
 add_executable(cppclient src/cppclient.cpp)
 target_link_libraries(cppclient ${catkin_LIBRARIES})
 add_dependencies(cppclient trial_service_gencpp)
+
+add_executable(cppclient2 src/cppclient2.cpp)
+target_link_libraries(cppclient2 ${catkin_LIBRARIES})
+add_dependencies(cppclient2 trial_service_gencpp)

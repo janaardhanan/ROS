@@ -4,22 +4,18 @@ from __future__ import print_function
 
 import sys
 import rospy
-from trial_service.srv import SumProduct
+from trial_service.srv import Diff
 
 
 def client(x,y):
-    print("Waiting for service SumProduct")
-    rospy.wait_for_service('SumProduct')
-    print("Service Available")
+    print("Waiting for service Diff")
+    rospy.wait_for_service('Diff')
     try:
-        sp= rospy.ServiceProxy('SumProduct', SumProduct)
+        sp= rospy.ServiceProxy('Diff', Diff)
         resp1= sp(x,y)
-        return (resp1.Sum, resp1.Product)
+        return (resp1.Diff)
     except rospy.ServiceExceptionas as e:
         print("Service call failed: ",e)
-
-    return ("a","b")
-
 
 
 if __name__ == "__main__":
@@ -30,5 +26,5 @@ if __name__ == "__main__":
         print("%s [x y]"%sys.argv[0])
         sys.exit(1)
     print("Requesting sum and product of %s, %s"%(x,y))
-    sum, product= client(x,y)
-    print("Sum is ", sum, " and product is ", product)
+    diff= client(x,y)
+    print("Difference= ", diff)
